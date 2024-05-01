@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>994</width>
-    <height>551</height>
+    <width>1095</width>
+    <height>610</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>480</width>
-    <height>240</height>
+    <width>960</width>
+    <height>480</height>
    </size>
   </property>
   <property name="baseSize">
@@ -25,37 +25,102 @@
   <property name="windowTitle">
    <string>Informative_APP</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <property name="styleSheet">
+    <string notr="true">background-color: #241F31;</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="label">
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="styleSheet">
-       <string notr="true">background-color: gray;
-color:red</string>
+       <string notr="true">color: rgb(222, 221, 218);
+gridline-color: rgb(255, 255, 255);
+font: 75 26pt &quot;Ubuntu&quot;;
+font-weight: bold;
+
+</string>
       </property>
       <property name="text">
-       <string>System Information</string>
+       <string>General Settings</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="dateTime">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>50</verstretch>
+       </sizepolicy>
       </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
+      <property name="styleSheet">
+       <string notr="true">font: 18pt &quot;Ubuntu&quot;;
+font-weight: bold;
+color: rgb(222, 221, 218);</string>
       </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>200</height>
-       </size>
+      <property name="text">
+       <string>Date/Time</string>
       </property>
-     </spacer>
+     </widget>
+    </item>
+    <item row="2" column="1" rowspan="3">
+     <widget class="QFrame" name="frame">
+      <property name="styleSheet">
+       <string notr="true">border-bottom-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.495 rgba(255, 255, 255, 255), stop:0.505 rgba(255, 0, 0, 255), stop:1 rgba(255, 0, 0, 255));</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>848</width>
+           <height>466</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="information">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+        <horstretch>80</horstretch>
+        <verstretch>50</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 18pt &quot;Ubuntu&quot;;
+font-weight: bold;
+color: rgb(222, 221, 218);
+</string>
+      </property>
+      <property name="text">
+       <string>Information</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -64,7 +129,7 @@ color:red</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>994</width>
+     <width>1095</width>
      <height>22</height>
     </rect>
    </property>
