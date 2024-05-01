@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QProcess>
 #include<QLabel>
+#include<QFrame>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Informative_APP; }
@@ -28,6 +29,8 @@ private:
     QLabel *Name;
     QLabel *kernel_version;
     QLabel *kernel_update;
+    QFrame *line;
+    QFrame *line2;
 
 
 };
