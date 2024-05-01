@@ -22,9 +22,9 @@ lockScreen::~lockScreen()
 void lockScreen::on_lineEdit_cursorPositionChanged()
 {
     ui->lineEdit->setMaxLength(1);
-   connect(ui->lineEdit, &QLineEdit::textChanged, this,[=](const QString text) {
+   connect(ui->lineEdit, &QLineEdit::textChanged, this,[=](const QString &text) {
         if (text.isEmpty() != true) {
-            ui->lineEdit_2->setFocusPolicy(Qt::TabFocus);
+            ui->lineEdit_2->setFocus(Qt::TabFocusReason);
         }
     });
 }
@@ -33,9 +33,10 @@ void lockScreen::on_lineEdit_cursorPositionChanged()
 void lockScreen::on_lineEdit_2_cursorPositionChanged()
 {
     ui->lineEdit_2->setMaxLength(1);
-   connect(ui->lineEdit_2, &QLineEdit::textChanged, this,[=](const QString text) {
+
+   connect(ui->lineEdit_2, &QLineEdit::textChanged, this,[=](const QString &text) {
         if (text.isEmpty() != true) {
-            ui->lineEdit_3->setFocusPolicy(Qt::TabFocus);
+            ui->lineEdit_3->setFocus(Qt::TabFocusReason);
         }
     });
 }
@@ -44,9 +45,9 @@ void lockScreen::on_lineEdit_2_cursorPositionChanged()
 void lockScreen::on_lineEdit_3_cursorPositionChanged()
 {
     ui->lineEdit_3->setMaxLength(1);
-    connect(ui->lineEdit_3, &QLineEdit::textChanged, this,[=](const QString text) {
+    connect(ui->lineEdit_3, &QLineEdit::textChanged, this,[=](const QString &text) {
         if (text.isEmpty() != true) {
-            ui->lineEdit_4->setFocusPolicy(Qt::TabFocus);
+            ui->lineEdit_4->setFocus(Qt::TabFocusReason);
         }
     });
 }
@@ -55,10 +56,10 @@ void lockScreen::on_lineEdit_3_cursorPositionChanged()
 void lockScreen::on_lineEdit_4_cursorPositionChanged()
 {
     ui->lineEdit_4->setMaxLength(1);
-    connect(ui->lineEdit_4, &QLineEdit::textChanged, this,[=](const QString text) {
+    connect(ui->lineEdit_4, &QLineEdit::textChanged, this,[=](const QString &text) {
 
         if (text.isEmpty()!= true) {
-            ui->pushButton->setFocusPolicy(Qt::TabFocus);
+            ui->pushButton->setFocus(Qt::TabFocusReason);
         }
     });
 }
