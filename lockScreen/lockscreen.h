@@ -21,10 +21,10 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_lineEdit_cursorPositionChanged();
-    void on_lineEdit_2_cursorPositionChanged();
-    void on_lineEdit_3_cursorPositionChanged();
-    void on_lineEdit_4_cursorPositionChanged();
+    void on_Pin0_cursorPositionChanged();
+    void on_Pin1_cursorPositionChanged();
+    void on_Pin2_cursorPositionChanged();
+    void on_Pin3_cursorPositionChanged();
 
 
 

@@ -17,6 +17,14 @@
    <string notr="true">background-color: #241F31;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+	background-color:transparent;
+	border:none;
+	border-bottom: 3px solid #484848;
+	border-radius: 3px
+}</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="4" column="5" colspan="2">
      <spacer name="horizontalSpacer_2">
@@ -35,11 +43,16 @@
      </spacer>
     </item>
     <item row="2" column="4">
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="Pin2">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="font">
        <font>
         <pointsize>16</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
         <kerning>false</kerning>
        </font>
@@ -49,15 +62,79 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="7">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>48</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-family: Times New Roman;
+font-weight:bold;
+color: rgb(222, 221, 218);
+margin-top:30px;
+
+</string>
+      </property>
+      <property name="text">
+       <string>Enter Your Pin</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2" colspan="3">
+     <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-family: Times New Roman;
+font-weight:bold;
+color: rgb(222, 221, 218);
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Enter</string>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="Pin0">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="font">
        <font>
         <pointsize>16</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
         <kerning>false</kerning>
        </font>
@@ -70,22 +147,72 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="5">
-     <widget class="QLineEdit" name="lineEdit_4">
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-        <kerning>false</kerning>
-       </font>
+    <item row="5" column="0" colspan="7">
+     <widget class="QFrame" name="frame_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
+      <property name="styleSheet">
+       <string notr="true">border:transparent;</string>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>847</width>
+           <height>90</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="7">
+     <widget class="QFrame" name="frame_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:transparent;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>858</width>
+           <height>90</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
     <item row="4" column="0" colspan="2">
@@ -138,66 +265,23 @@
       </layout>
      </widget>
     </item>
-    <item row="3" column="0" colspan="7">
-     <widget class="QFrame" name="frame_4">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:transparent;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>858</width>
-           <height>90</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="7">
-     <widget class="QLabel" name="label">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+    <item row="2" column="5">
+     <widget class="QLineEdit" name="Pin3">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>48</pointsize>
-        <weight>75</weight>
+        <pointsize>16</pointsize>
         <bold>true</bold>
+        <kerning>false</kerning>
        </font>
       </property>
-      <property name="styleSheet">
-       <string notr="true">font-family: Times New Roman;
-font-weight:bold;
-color: rgb(222, 221, 218);
-
-
-</string>
-      </property>
-      <property name="text">
-       <string>Enter Your Password</string>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -220,69 +304,6 @@ color: rgb(222, 221, 218);
       </property>
      </spacer>
     </item>
-    <item row="5" column="0" colspan="7">
-     <widget class="QFrame" name="frame_2">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:transparent;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>847</width>
-           <height>90</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="4" column="2" colspan="3">
-     <widget class="QPushButton" name="pushButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font-family: Times New Roman;
-font-weight:bold;
-color: rgb(222, 221, 218);
-
-
-</string>
-      </property>
-      <property name="text">
-       <string>Enter</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="6">
      <spacer name="horizontalSpacer_6">
       <property name="orientation">
@@ -300,11 +321,16 @@ color: rgb(222, 221, 218);
      </spacer>
     </item>
     <item row="2" column="3">
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="Pin1">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="font">
        <font>
         <pointsize>16</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
         <kerning>false</kerning>
        </font>
@@ -332,10 +358,10 @@ color: rgb(222, 221, 218);
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>lineEdit_4</tabstop>
+  <tabstop>Pin0</tabstop>
+  <tabstop>Pin1</tabstop>
+  <tabstop>Pin2</tabstop>
+  <tabstop>Pin3</tabstop>
   <tabstop>pushButton</tabstop>
  </tabstops>
  <resources/>
