@@ -14,6 +14,6 @@ BBLAYERS ?= " \
   "
 ```
 
-1- Use the conf directory as is, and copy the contents of the conf directory to the build directory.
-2- Use the meta-infotainment layer to include weston-init patch and launcher recipe
-3- Build using the `core-image-weston` image
+1. Use the conf directory as is, and copy the contents of the conf directory to the build directory.
+2. Use the meta-infotainment layer to include weston-init patch and launcher recipe
+3. Build using the `core-image-weston` image
