@@ -33,6 +33,7 @@ Informative_APP::~Informative_APP()
 
 void Informative_APP::add_label()
 {
+
     // intializing a pointer points to frame layout  so added labels will have the same layout
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(ui->frame->layout());
 
@@ -110,18 +111,19 @@ void Informative_APP::Kernel_info()
 
     // <span> tag --> used to give each line a different style
     //<span> dispalyed word </span>
-    // + kernelVersion  + --> used to print content of the vriable"kernel version"
+    // + kernelVersion  + --> used to print content of the variable "kernel version"
+    kernel_version->setStyleSheet("padding-bottom: 20px;");
     kernel_version->setText("<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times, serif; font-weight:bold; \
-                            font-size: 24pt;'>Version</span><br>"\
-                        "<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times,sans-serif; font-weight:bold; \
+                            font-size: 24pt;'>Version</span><br> "\
+                        "<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times,sans-serif; font-weight:normal; \
                              font-size: 16pt;'>"+ kernelVersion +"</span>");
 
     // <span> tag --> used to give each line a different style
     //<span> dispalyed word </span>
-    // + dateModified  + --> used to print content of the vriable "last update time"
+    // + dateModified  + --> used to print content of the variable "last update time"
     kernel_update->setText("<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times, serif; font-weight:bold; \
             font-size: 24pt;'>Last Update</span><br>"\
-        "<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times,sans-serif; font-weight:bold; \
+        "<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times,sans-serif; font-weight:normal; \
              font-size: 16pt;'>"+ dateModified +"</span>");
 
     // set frame shape to Horizontal line

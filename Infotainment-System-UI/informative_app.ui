@@ -33,45 +33,11 @@
     <string notr="true">background-color: #241F31;</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="3">
-     <widget class="QLabel" name="label">
-      <property name="baseSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(222, 221, 218);
-gridline-color: rgb(255, 255, 255);
-font: 75 26pt &quot;Ubuntu&quot;;
-font-weight: bold;
-
-</string>
-      </property>
-      <property name="text">
-       <string>General Settings</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QFrame" name="settingsunderline">
-      <property name="styleSheet">
-       <string notr="true">background-color:#302A43;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::HLine</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
       <item>
        <widget class="QPushButton" name="information">
         <property name="sizePolicy">
@@ -80,14 +46,25 @@ font-weight: bold;
           <verstretch>50</verstretch>
          </sizepolicy>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #241F31;
-border:transparent;
-font: 18pt &quot;Ubuntu&quot;;
-font-weight: bold;
-color: rgb(222, 221, 218);
+         <string notr="true">QPushButton#information:pressed{
+	background-color:#1e1928;
+	color:#dedec8;
+}
 
-</string>
+QPushButton#information{
+	background-color: #241F31;
+	border:transparent;
+	font: 18pt ;
+	font-weight: bold;
+	color: rgb(222, 221, 218);
+}</string>
         </property>
         <property name="text">
          <string>Information</string>
@@ -97,7 +74,9 @@ color: rgb(222, 221, 218);
       <item>
        <widget class="QFrame" name="buttonsBreak">
         <property name="styleSheet">
-         <string notr="true">background-color:#302A43;</string>
+         <string notr="true">background-color:#302A43;
+border : 2px solid #302A43;
+border-radius: 10px;</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::HLine</enum>
@@ -115,12 +94,25 @@ color: rgb(222, 221, 218);
           <verstretch>50</verstretch>
          </sizepolicy>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #241F31;
-border:transparent;
-font: 18pt &quot;Ubuntu&quot;;
-font-weight: bold;
-color: rgb(222, 221, 218);
+         <string notr="true">QPushButton#dateTime:pressed{
+	background-color:#1e1928;
+	color:#dedec8;
+}
+
+QPushButton#dateTime{
+	background-color: #241F31;
+	border:transparent;
+	font: 18pt ;
+	font-weight: bold;
+	color: rgb(222, 221, 218);
+}
 
 </string>
         </property>
@@ -130,6 +122,19 @@ color: rgb(222, 221, 218);
        </widget>
       </item>
      </layout>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QFrame" name="settingsunderline">
+      <property name="styleSheet">
+       <string notr="true">background-color:#302A43;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::HLine</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+     </widget>
     </item>
     <item row="2" column="1">
      <widget class="QFrame" name="FrameButtonBreak">
@@ -175,17 +180,37 @@ color: rgb(222, 221, 218);
       </layout>
      </widget>
     </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QLabel" name="label">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(222, 221, 218);
+gridline-color: rgb(255, 255, 255);
+font: 75 26pt &quot;Ubuntu&quot;;
+font-weight: bold;
+
+</string>
+      </property>
+      <property name="text">
+       <string>General Settings</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1036</width>
-     <height>22</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
