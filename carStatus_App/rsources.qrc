@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/car.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>img/thermometer.png</file>
+    </qresource>
+</RCC>
