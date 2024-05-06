@@ -23,8 +23,10 @@ public:
     void add_Rimg();
     void remove_img();
 
-    void add_Bled();
-    void add_Rled();
+    void add_Bled_on();
+    void add_Rled_on();
+    void add_Bled_off();
+    void add_Rled_off();
     void remove_leds();
 
     void read_temp();
@@ -37,5 +39,7 @@ private:
 
     QLabel *blue_led = new QLabel();
     QLabel *red_led = new QLabel();
+    QLabel *blue_led_off = new QLabel();
+    QLabel *red_led_off = new QLabel();
 };
 #endif // CARSTATUS_APP_H

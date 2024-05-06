@@ -4,5 +4,7 @@
         <file>img/red led.png</file>
         <file>img/blue_temp.png</file>
         <file>img/red_temp.png</file>
+        <file>img/blue led off.png</file>
+        <file>img/red ledoff.png</file>
     </qresource>
 </RCC>

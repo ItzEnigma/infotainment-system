@@ -38,17 +38,17 @@ public:
     QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer_3;
     QLabel *label;
-    QFrame *frame;
+    QFrame *temp_frame;
     QSpacerItem *horizontalSpacer_6;
     QVBoxLayout *verticalLayout;
     QSpacerItem *verticalSpacer_4;
     QHBoxLayout *LED1_HorzLayout;
-    QFrame *LED2_Icon;
+    QFrame *red_led_frame;
     QSpacerItem *horizontalSpacer_4;
     QLabel *LED1_Status;
     QSpacerItem *verticalSpacer_3;
     QHBoxLayout *LED2_HorzLayout;
-    QFrame *LED1_Icon;
+    QFrame *blue_led_frame;
     QSpacerItem *horizontalSpacer_5;
     QLabel *LED2_Status;
     QSpacerItem *verticalSpacer_5;
@@ -128,16 +128,16 @@ public:
 
         gridLayout->addWidget(label, 2, 4, 1, 1);
 
-        frame = new QFrame(centralwidget);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
-        frame->setSizePolicy(sizePolicy);
-        frame->setMinimumSize(QSize(240, 240));
-        frame->setStyleSheet(QString::fromUtf8("border:transparent;"));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
+        temp_frame = new QFrame(centralwidget);
+        temp_frame->setObjectName(QString::fromUtf8("temp_frame"));
+        sizePolicy.setHeightForWidth(temp_frame->sizePolicy().hasHeightForWidth());
+        temp_frame->setSizePolicy(sizePolicy);
+        temp_frame->setMinimumSize(QSize(240, 240));
+        temp_frame->setStyleSheet(QString::fromUtf8("border:transparent;"));
+        temp_frame->setFrameShape(QFrame::StyledPanel);
+        temp_frame->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frame, 2, 1, 1, 1);
+        gridLayout->addWidget(temp_frame, 2, 1, 1, 1);
 
 
         horizontalLayout->addLayout(gridLayout);
@@ -154,13 +154,13 @@ public:
 
         LED1_HorzLayout = new QHBoxLayout();
         LED1_HorzLayout->setObjectName(QString::fromUtf8("LED1_HorzLayout"));
-        LED2_Icon = new QFrame(centralwidget);
-        LED2_Icon->setObjectName(QString::fromUtf8("LED2_Icon"));
-        LED2_Icon->setMinimumSize(QSize(160, 160));
-        LED2_Icon->setFrameShape(QFrame::StyledPanel);
-        LED2_Icon->setFrameShadow(QFrame::Raised);
+        red_led_frame = new QFrame(centralwidget);
+        red_led_frame->setObjectName(QString::fromUtf8("red_led_frame"));
+        red_led_frame->setMinimumSize(QSize(160, 160));
+        red_led_frame->setFrameShape(QFrame::StyledPanel);
+        red_led_frame->setFrameShadow(QFrame::Raised);
 
-        LED1_HorzLayout->addWidget(LED2_Icon);
+        LED1_HorzLayout->addWidget(red_led_frame);
 
         horizontalSpacer_4 = new QSpacerItem(30, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
@@ -168,9 +168,9 @@ public:
 
         LED1_Status = new QLabel(centralwidget);
         LED1_Status->setObjectName(QString::fromUtf8("LED1_Status"));
-        LED1_Status->setMinimumSize(QSize(80, 50));
+        LED1_Status->setMinimumSize(QSize(100, 50));
         QFont font2;
-        font2.setPointSize(14);
+        font2.setPointSize(18);
         font2.setBold(true);
         font2.setWeight(75);
         LED1_Status->setFont(font2);
@@ -187,13 +187,13 @@ public:
 
         LED2_HorzLayout = new QHBoxLayout();
         LED2_HorzLayout->setObjectName(QString::fromUtf8("LED2_HorzLayout"));
-        LED1_Icon = new QFrame(centralwidget);
-        LED1_Icon->setObjectName(QString::fromUtf8("LED1_Icon"));
-        LED1_Icon->setMinimumSize(QSize(160, 160));
-        LED1_Icon->setFrameShape(QFrame::StyledPanel);
-        LED1_Icon->setFrameShadow(QFrame::Raised);
+        blue_led_frame = new QFrame(centralwidget);
+        blue_led_frame->setObjectName(QString::fromUtf8("blue_led_frame"));
+        blue_led_frame->setMinimumSize(QSize(160, 160));
+        blue_led_frame->setFrameShape(QFrame::StyledPanel);
+        blue_led_frame->setFrameShadow(QFrame::Raised);
 
-        LED2_HorzLayout->addWidget(LED1_Icon);
+        LED2_HorzLayout->addWidget(blue_led_frame);
 
         horizontalSpacer_5 = new QSpacerItem(30, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
@@ -201,7 +201,7 @@ public:
 
         LED2_Status = new QLabel(centralwidget);
         LED2_Status->setObjectName(QString::fromUtf8("LED2_Status"));
-        LED2_Status->setMinimumSize(QSize(80, 50));
+        LED2_Status->setMinimumSize(QSize(100, 50));
         LED2_Status->setFont(font2);
         LED2_Status->setAlignment(Qt::AlignCenter);
 

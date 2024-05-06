@@ -708,8 +708,10 @@ qrc_resources.cpp: ../carStatus_App/resources.qrc \
 		../../../Qt/5.12.12/gcc_64/bin/rcc \
 		../carStatus_App/img/blue_temp.png \
 		../carStatus_App/img/red_temp.png \
+		../carStatus_App/img/red\ ledoff.png \
 		../carStatus_App/img/red\ led.png \
-		../carStatus_App/img/blue\ led.png
+		../carStatus_App/img/blue\ led.png \
+		../carStatus_App/img/blue\ led\ off.png
 	/home/aly/Qt/5.12.12/gcc_64/bin/rcc -name resources ../carStatus_App/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -1119,8 +1121,7 @@ carstatus_app.o: ../carStatus_App/carstatus_app.cpp ../carStatus_App/carstatus_a
 		../../../Qt/5.12.12/gcc_64/include/QtCore/QFile \
 		../../../Qt/5.12.12/gcc_64/include/QtCore/QTimer \
 		../../../Qt/5.12.12/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt/5.12.12/gcc_64/include/QtCore/qbasictimer.h \
-		../../../Qt/5.12.12/gcc_64/include/QtGui/QFontMetrics
+		../../../Qt/5.12.12/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o carstatus_app.o ../carStatus_App/carstatus_app.cpp
 
 qrc_resources.o: qrc_resources.cpp 
