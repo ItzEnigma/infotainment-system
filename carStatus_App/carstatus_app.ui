@@ -36,6 +36,7 @@
        <font>
         <family>Times New Roman</family>
         <pointsize>40</pointsize>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -158,6 +159,13 @@ margin-top:5px;
             <height>200</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>24</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -230,7 +238,7 @@ margin-top:5px;
         <item>
          <layout class="QHBoxLayout" name="LED1_HorzLayout">
           <item>
-           <widget class="QFrame" name="LED1_Icon">
+           <widget class="QFrame" name="LED2_Icon">
             <property name="minimumSize">
              <size>
               <width>160</width>
@@ -272,6 +280,7 @@ margin-top:5px;
             <property name="font">
              <font>
               <pointsize>14</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -301,7 +310,7 @@ margin-top:5px;
         <item>
          <layout class="QHBoxLayout" name="LED2_HorzLayout">
           <item>
-           <widget class="QFrame" name="LED2_Icon">
+           <widget class="QFrame" name="LED1_Icon">
             <property name="minimumSize">
              <size>
               <width>160</width>
@@ -343,6 +352,7 @@ margin-top:5px;
             <property name="font">
              <font>
               <pointsize>14</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
