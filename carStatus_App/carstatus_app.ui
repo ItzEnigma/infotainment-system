@@ -36,7 +36,6 @@
        <font>
         <family>Times New Roman</family>
         <pointsize>40</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -44,11 +43,12 @@
        <string notr="true">font-family: Times New Roman;
 font-weight:bold;
 color: rgb(222, 221, 218);
-margin-top:5px;
+margin-top:20px;
+margin-bottom:20px;
 </string>
       </property>
       <property name="text">
-       <string>Temperature Panel</string>
+       <string>Status Panel</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -59,38 +59,6 @@ margin-top:5px;
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>60</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="3">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>80</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="2" column="0">
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -117,24 +85,8 @@ margin-top:5px;
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>10</width>
             <height>120</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="5">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>150</width>
-            <height>20</height>
            </size>
           </property>
          </spacer>
@@ -162,7 +114,6 @@ margin-top:5px;
           <property name="font">
            <font>
             <pointsize>24</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -176,6 +127,38 @@ margin-top:5px;
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>5</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="3">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>80</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="2" column="1">
          <widget class="QFrame" name="temp_frame">
@@ -201,6 +184,22 @@ margin-top:5px;
            <enum>QFrame::Raised</enum>
           </property>
          </widget>
+        </item>
+        <item row="2" column="5">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>150</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -241,8 +240,8 @@ margin-top:5px;
            <widget class="QFrame" name="red_led_frame">
             <property name="minimumSize">
              <size>
-              <width>160</width>
-              <height>160</height>
+              <width>120</width>
+              <height>120</height>
              </size>
             </property>
             <property name="frameShape">
@@ -280,7 +279,6 @@ margin-top:5px;
             <property name="font">
              <font>
               <pointsize>18</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -313,8 +311,8 @@ margin-top:5px;
            <widget class="QFrame" name="blue_led_frame">
             <property name="minimumSize">
              <size>
-              <width>160</width>
-              <height>160</height>
+              <width>120</width>
+              <height>120</height>
              </size>
             </property>
             <property name="frameShape">
@@ -352,7 +350,6 @@ margin-top:5px;
             <property name="font">
              <font>
               <pointsize>18</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
