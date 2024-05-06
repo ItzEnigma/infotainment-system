@@ -11,7 +11,11 @@
 LICENSE = "Unknown"
 LIC_FILES_CHKSUM = "file://UNLICENSE;md5=21ef108f5a4f7b4ef7f0ddbb3c6a6492"
 
-SRC_URI = "git://github.com/complexlogic/flex-launcher;protocol=https;branch=master"
+SRC_URI = " \
+	git://github.com/complexlogic/flex-launcher;protocol=https;branch=master \
+	file://config.ini \	
+	file://assets \
+	"
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
@@ -43,12 +47,12 @@ do_compile(){
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/build/flex-launcher ${D}${bindir}
-	install -m 0755 ${S}/build/config.ini ${D}${bindir}
+	install -m 0755 ${WORKDIR}/config.ini ${D}${bindir}
 
 	install -d ${D}${bindir}/assets/fonts
-	install -m 0755 ${S}/build/assets/fonts/* ${D}${bindir}/assets/fonts
+	install -m 0755 ${WORKDIR}/assets/fonts/* ${D}${bindir}/assets/fonts
 
 	install -d ${D}${bindir}/assets/icons
-	install -m 0755 ${S}/build/assets/icons/* ${D}${bindir}/assets/icons
+	install -m 0755 ${WORKDIR}/assets/icons/* ${D}${bindir}/assets/icons
 }
 
