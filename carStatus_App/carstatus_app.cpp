@@ -14,7 +14,6 @@ carStatus_App::carStatus_App(QWidget *parent)
 {
     ui->setupUi(this);
 
-
     QTimer *timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&carStatus_App::read_temp);
     timer->start(100);
@@ -28,7 +27,7 @@ carStatus_App::~carStatus_App()
 void carStatus_App::add_Gimg()
 {
 
-     QVBoxLayout *layout = new QVBoxLayout(ui->frame);
+    QVBoxLayout *layout = new QVBoxLayout(ui->frame);
 
     green_temp->hide();
     delete green_temp;
@@ -36,8 +35,6 @@ void carStatus_App::add_Gimg()
     green_temp->setAlignment(Qt::AlignCenter);
     green_temp->setSizeIncrement(ui->frame->width(),ui->frame->height());
     layout->addWidget(green_temp);
-
-
 
     QPixmap temp(":/img/img/car.png");
     int w = ui->frame->width()-20;
@@ -59,8 +56,6 @@ void carStatus_App::add_Rimg()
     red_temp->setSizeIncrement(ui->frame->width(),ui->frame->height());
     layout->addWidget(red_temp);
 
-
-
     QPixmap temp(":/img/thermometer.png");
     int w = ui->frame->width()-20;
     int h = ui->frame->height()-20;
@@ -78,9 +73,8 @@ void carStatus_App::remove_img()
 
 void carStatus_App::read_temp()
 {
-    QFile file("/sys/class/leds/input2::capslock/brightness");
+    QFile file("/sys/class/leds/input3::capslock/brightness");
     file.open(QIODevice::ReadOnly);
-
 
     // Read the contents of the file
     QByteArray data = file.readAll();
@@ -104,6 +98,5 @@ void carStatus_App::read_temp()
         carStatus_App::remove_img();
         carStatus_App::add_Rimg();
     }
-
-
 }
+

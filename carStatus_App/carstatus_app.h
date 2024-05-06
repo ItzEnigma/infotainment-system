@@ -28,6 +28,5 @@ private:
     Ui::carStatus_App *ui;
     QLabel *green_temp = new QLabel();
     QLabel *red_temp = new QLabel();
-
 };
 #endif // CARSTATUS_APP_H
