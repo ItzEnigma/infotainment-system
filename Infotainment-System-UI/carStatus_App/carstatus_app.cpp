@@ -13,7 +13,7 @@ carStatus_App::carStatus_App(QWidget *parent)
 
     QTimer *timer = new QTimer(this);
     // invokes read_temp function when the timer timees out
-    connect(timer, &QTimer::timeout, this, &carStatus_App::read_temp);
+    connect(timer, &QTimer::timeout, this, &carStatus_App::read_status);
     // timer times out every 100ms
     timer->start(100);
 }
@@ -231,30 +231,30 @@ void carStatus_App::remove_leds()
     blue_led_off->hide();
 }
 
-void carStatus_App::read_temp()
+void carStatus_App::read_status()
 {
     // variable to store the line that have been read from the file
     QString line;
     //variable to store the temperature until it converted to float
-    QString data;
+    QString temp_data;
     // variable to store the temperature
     float temp;
 
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
-    QString path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave";
+    QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave";
     /* -------------------------------------------------- */
 
     try
     {
         // check if the file exists
-        if (!QFile::exists(path))
+        if (!QFile::exists(temp_path))
         {
             throw 1;
         }
 
         // open the file
-        QFile file(path);
+        QFile file(temp_path);
 
         // open the file to read
         file.open(QIODevice::ReadOnly);
@@ -272,21 +272,21 @@ void carStatus_App::read_temp()
             {
                 // Extract the substring starting from the position of "t="
                 // +2 to skip "t="
-                data = line.mid(index + 2);
+                temp_data = line.mid(index + 2);
 
             }
         }
 
 
         //  convert  the reading into float value
-        temp = data.toFloat()/1000;
+        temp = temp_data.toFloat()/1000;
         // reconvert the temperature into string for printing
-        data = QString::number(temp);
+        temp_data = QString::number(temp);
 
         // display the output on the plainText
         // QChar( 0x00B0) --> to display the temerature degree
         ui->label->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-                       font-size: 36pt;font-stretch:ultra-condensed;'>" + data + QChar(0x00B0) + "C");
+                       font-size: 36pt;font-stretch:ultra-condensed;'>" + temp_data + QChar(0x00B0) + "C");
         // closing the file
         file.close();
     }
@@ -299,17 +299,64 @@ void carStatus_App::read_temp()
     if (temp < 30)
     {
         remove_img();
-        remove_leds();
         add_Gimg();
-        add_Bled_on();
-        add_Rled_off();
     }
     else
     {
-        remove_img();
         remove_leds();
         add_Rimg();
-        add_Bled_off();
-        add_Rled_on();
     }
+
+    //set the path to the red and blue leds files
+    QFile blueLed_path("/dev/dio0");
+    QFile redLed_path("/dev/dio1");
+
+    // open the file to read
+    blueLed_path.open(QIODevice::ReadOnly);
+    redLed_path.open(QIODevice::ReadOnly);
+
+    // Read the contents of the file
+    QByteArray blueLed_data = blueLed_path.readAll();
+    QByteArray redLed_data = redLed_path.readAll();
+
+    // Convert data to string
+    QString blueLed_state = QString::fromUtf8(blueLed_data);
+    QString redLed_state = QString::fromUtf8(redLed_data);
+
+    // removes the "\n" from the end of the string
+    blueLed_state.remove("\n");
+    redLed_state.remove("\n");
+
+    // closing the file files
+    blueLed_path.close();
+    redLed_path.close();
+
+
+    if (blueLed_state == "1" && redLed_state == "1")
+        {
+            remove_leds();
+            add_Bled_on();
+            add_Rled_on();
+        }
+    else if(blueLed_state == "0" && redLed_state == "0")
+    {
+        remove_leds();
+        add_Bled_off();
+        add_Rled_off();
+    }
+
+    else if(blueLed_state == "1" && redLed_state == "0")
+    {
+        remove_leds();
+        add_Rled_off();
+        add_Bled_on();
+    }
+    else if(blueLed_state == "0" && redLed_state == "1")
+    {
+        remove_leds();
+        add_Rled_on();
+        add_Bled_off();
+    }
+
+
 }

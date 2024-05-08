@@ -29,7 +29,7 @@ public:
     void add_Rled_off();
     void remove_leds();
 
-    void read_temp();
+    void read_status();
 
 
 private:
