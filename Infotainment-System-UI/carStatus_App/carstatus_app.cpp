@@ -4,6 +4,7 @@
 #include <QBoxLayout>
 #include <QFile>
 #include <QTimer>
+#include<QTextStream>
 
 carStatus_App::carStatus_App(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::carStatus_App)
@@ -232,12 +233,16 @@ void carStatus_App::remove_leds()
 
 void carStatus_App::read_temp()
 {
+    // variable to store the line that have been read from the file
+    QString line;
+    //variable to store the temperature until it converted to float
+    QString data;
     // variable to store the temperature
-    int temp;
+    float temp;
 
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
-    QString path = "/sys/class/leds/input3::capslock/brightness";
+    QString path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave";
     /* -------------------------------------------------- */
 
     try
@@ -254,24 +259,36 @@ void carStatus_App::read_temp()
         // open the file to read
         file.open(QIODevice::ReadOnly);
 
-        // Read the contents of the file
-        QByteArray data = file.readAll();
+        // Read the file line by line
+        QTextStream in(&file);
+        // check if you reached the end of the file
+        while(!in.atEnd())
+        {
+            line = in.readLine();
+            // Find the position of "t=" in the line
+            int index = line.indexOf("t=");
+            // check if the word found
+            if (index !=-1)
+            {
+                // Extract the substring starting from the position of "t="
+                // +2 to skip "t="
+                data = line.mid(index + 2);
 
-        // Convert data to string
-        QString text = QString::fromUtf8(data);
-        // removes the "\n" from the end of the string
-        text.replace("\n", " ");
+            }
+        }
+
+
+        //  convert  the reading into float value
+        temp = data.toFloat()/1000;
+        // reconvert the temperature into string for printing
+        data = QString::number(temp);
 
         // display the output on the plainText
         // QChar( 0x00B0) --> to display the temerature degree
         ui->label->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-                       font-size: 36pt;font-stretch:ultra-condensed;'>" +
-                           text + QChar(0x00B0) + "C");
+                       font-size: 36pt;font-stretch:ultra-condensed;'>" + data + QChar(0x00B0) + "C");
         // closing the file
         file.close();
-
-        //  convert  the readint into integer value
-        temp = text.toInt();
     }
     catch (int e) // if the file does not exist
     {
@@ -279,7 +296,7 @@ void carStatus_App::read_temp()
     }
 
     /* CHECK IF THE TEMPERATURE IS HIGH OR LOW*/
-    if (temp == 0)
+    if (temp < 30)
     {
         remove_img();
         remove_leds();
