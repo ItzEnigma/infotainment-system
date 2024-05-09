@@ -4,7 +4,7 @@
 #include <QBoxLayout>
 #include <QFile>
 #include <QTimer>
-#include<QTextStream>
+#include <QTextStream>
 
 carStatus_App::carStatus_App(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::carStatus_App)
@@ -40,7 +40,7 @@ void carStatus_App::add_Gimg()
     green_temp->setSizeIncrement(ui->temp_frame->width(), ui->temp_frame->height());
 
     // set the path of the blue image to temp variable
-    QPixmap temp(":/img/img/blue_temp.png");
+    QPixmap temp(":/img/blue_temp.png");
     // set the the hieght and width of the image to the hieght and width of the frame
     // KeepAspectRation -->  to show the full  image
     int w = ui->temp_frame->width() - 20;
@@ -72,7 +72,7 @@ void carStatus_App::add_Rimg()
     red_temp->setSizeIncrement(ui->temp_frame->width(), ui->temp_frame->height());
 
     // set the path of the red image to temp variable
-    QPixmap temp(":/img/img/red_temp.png");
+    QPixmap temp(":/img/red_temp.png");
     int w = ui->temp_frame->width() - 20;
     int h = ui->temp_frame->height() - 20;
     // set the the hieght and width of the image to the hieght and width of the frame
@@ -115,7 +115,7 @@ void carStatus_App::add_Bled_on()
     layout->addWidget(blue_led);
 
     // set the path of the blue image to blue led variable
-    QPixmap temp(":/img/img/blue led.png");
+    QPixmap temp(":/img/blue_led.png");
     // set the the hieght and width of the image to the hieght and width of the frame
     // KeepAspectRation -->  to show the full  image
     int w = ui->blue_led_frame->width();
@@ -146,7 +146,7 @@ void carStatus_App::add_Rled_on()
     layout->addWidget(red_led);
 
     // set the path of the blue image to red led variable
-    QPixmap temp(":/img/img/red led.png");
+    QPixmap temp(":/img/red_led.png");
     // set the the hieght and width of the image to the hieght and width of the frame
     // KeepAspectRation -->  to show the full  image
     int w = ui->red_led_frame->width();
@@ -178,7 +178,7 @@ void carStatus_App::add_Bled_off()
     layout->addWidget(blue_led_off);
 
     // set the path of the blue image to blue led variable
-    QPixmap temp(":/img/img/blue led off.png");
+    QPixmap temp(":/img/blue_led_off.png");
     // set the the hieght and width of the image to the hieght and width of the frame
     // KeepAspectRation -->  to show the full  image
     int w = ui->blue_led_frame->width();
@@ -212,7 +212,7 @@ void carStatus_App::add_Rled_off()
     layout->addWidget(red_led_off);
 
     // set the path of the blue image to red led variable
-    QPixmap temp(":/img/img/red ledoff.png");
+    QPixmap temp(":/img/red_led_off.png");
     // set the the hieght and width of the image to the hieght and width of the frame
     // KeepAspectRation -->  to show the full  image
     int w = ui->red_led_frame->width();
@@ -235,7 +235,7 @@ void carStatus_App::read_status()
 {
     // variable to store the line that have been read from the file
     QString line;
-    //variable to store the temperature until it converted to float
+    // variable to store the temperature until it converted to float
     QString temp_data;
     // variable to store the temperature
     float temp;
@@ -243,6 +243,10 @@ void carStatus_App::read_status()
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
     QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave";
+
+    // set the path to the red and blue leds files
+    QString blueLed_path = "/dev/dio0";
+    QString redLed_path = "/dev/dio1";
     /* -------------------------------------------------- */
 
     try
@@ -262,33 +266,44 @@ void carStatus_App::read_status()
         // Read the file line by line
         QTextStream in(&file);
         // check if you reached the end of the file
-        while(!in.atEnd())
+        while (!in.atEnd())
         {
             line = in.readLine();
             // Find the position of "t=" in the line
             int index = line.indexOf("t=");
             // check if the word found
-            if (index !=-1)
+            if (index != -1)
             {
                 // Extract the substring starting from the position of "t="
                 // +2 to skip "t="
                 temp_data = line.mid(index + 2);
-
             }
         }
 
-
         //  convert  the reading into float value
-        temp = temp_data.toFloat()/1000;
+        temp = temp_data.toFloat() / 1000;
         // reconvert the temperature into string for printing
         temp_data = QString::number(temp);
 
         // display the output on the plainText
         // QChar( 0x00B0) --> to display the temerature degree
         ui->label->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-                       font-size: 36pt;font-stretch:ultra-condensed;'>" + temp_data + QChar(0x00B0) + "C");
+                       font-size: 36pt;font-stretch:ultra-condensed;'>" +
+                           temp_data + QChar(0x00B0) + "C");
         // closing the file
         file.close();
+
+        // check if the temperature is high or low
+        if (temp < 30)
+        {
+            remove_img();
+            add_Gimg();
+        }
+        else
+        {
+            remove_leds();
+            add_Rimg();
+        }
     }
     catch (int e) // if the file does not exist
     {
@@ -296,67 +311,79 @@ void carStatus_App::read_status()
     }
 
     /* CHECK IF THE TEMPERATURE IS HIGH OR LOW*/
-    if (temp < 30)
+
+    try
     {
-        remove_img();
-        add_Gimg();
-    }
-    else
-    {
-        remove_leds();
-        add_Rimg();
-    }
+        if (!QFile::exists(blueLed_path) || !QFile::exists(redLed_path))
+        {
+            throw 1;
+        }
 
-    //set the path to the red and blue leds files
-    QFile blueLed_path("/dev/dio0");
-    QFile redLed_path("/dev/dio1");
+        QFile blueLed_file(blueLed_path);
+        QFile redLed_file(redLed_path);
 
-    // open the file to read
-    blueLed_path.open(QIODevice::ReadOnly);
-    redLed_path.open(QIODevice::ReadOnly);
+        // Check ownership and permissions
+        if (!blueLed_file.open(QIODevice::ReadOnly) || !redLed_file.open(QIODevice::ReadOnly))
+        {
+            throw 1;
+        }
 
-    // Read the contents of the file
-    QByteArray blueLed_data = blueLed_path.readAll();
-    QByteArray redLed_data = redLed_path.readAll();
+        // check ownership
+        if (!blueLed_file.setPermissions(QFileDevice::ReadOwner) || !redLed_file.setPermissions(QFileDevice::ReadOwner))
+        {
+            throw 1;
+        }
 
-    // Convert data to string
-    QString blueLed_state = QString::fromUtf8(blueLed_data);
-    QString redLed_state = QString::fromUtf8(redLed_data);
+        // open the file to read
+        // blueLed_file.open(QIODevice::ReadOnly);
+        // redLed_file.open(QIODevice::ReadOnly);
 
-    // removes the "\n" from the end of the string
-    blueLed_state.remove("\n");
-    redLed_state.remove("\n");
+        // Read the contents of the file
+        QByteArray blueLed_data = blueLed_file.readAll();
+        QByteArray redLed_data = redLed_file.readAll();
 
-    // closing the file files
-    blueLed_path.close();
-    redLed_path.close();
+        // Convert data to string
+        QString blueLed_state = QString::fromUtf8(blueLed_data).at(0);
+        QString redLed_state = QString::fromUtf8(redLed_data).at(0);
 
+        // removes the "\n" from the end of the string
+        // blueLed_state.remove("\n");
+        // redLed_state.remove("\n");
 
-    if (blueLed_state == "1" && redLed_state == "1")
+        // closing the file files
+        blueLed_file.close();
+        redLed_file.close();
+
+        if (blueLed_state == "1" && redLed_state == "1")
         {
             remove_leds();
             add_Bled_on();
             add_Rled_on();
         }
-    else if(blueLed_state == "0" && redLed_state == "0")
+        else if (blueLed_state == "0" && redLed_state == "0")
+        {
+            remove_leds();
+            add_Bled_off();
+            add_Rled_off();
+        }
+
+        else if (blueLed_state == "1" && redLed_state == "0")
+        {
+            remove_leds();
+            add_Rled_off();
+            add_Bled_on();
+        }
+        else if (blueLed_state == "0" && redLed_state == "1")
+        {
+            remove_leds();
+            add_Rled_on();
+            add_Bled_off();
+        }
+    }
+    catch (int e)
     {
         remove_leds();
         add_Bled_off();
         add_Rled_off();
     }
-
-    else if(blueLed_state == "1" && redLed_state == "0")
-    {
-        remove_leds();
-        add_Rled_off();
-        add_Bled_on();
-    }
-    else if(blueLed_state == "0" && redLed_state == "1")
-    {
-        remove_leds();
-        add_Rled_on();
-        add_Bled_off();
-    }
-
-
 }
