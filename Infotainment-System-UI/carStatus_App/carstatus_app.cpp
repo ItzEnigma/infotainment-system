@@ -249,7 +249,7 @@ void carStatus_App::read_status()
 
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
-    QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/temperature"; // /sys/bus/w1/devices/28-3de1e380281d/w1_slave
+    QString temp_path = "/dev/dio2";
 
     // set the path to the red and blue leds files
     QString blueLed_path = "/dev/dio0";
@@ -283,7 +283,7 @@ void carStatus_App::read_status()
         // QChar( 0x00B0) --> to display the temerature degree
         ui->label->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
                        font-size: 36pt;font-stretch:ultra-condensed;'>" +
-                           temp_data + QChar(0x00B0) + "C");
+                           temp_data + ' ' + QChar(0x00B0) + "C");
         // closing the file
         file.close();
 
