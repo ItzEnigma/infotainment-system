@@ -242,7 +242,7 @@ void carStatus_App::read_status()
 
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
-    QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave";
+    QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/w1_slave"; // /sys/bus/w1/devices/28-3de1e380281d/w1_slave
 
     // set the path to the red and blue leds files
     QString blueLed_path = "/dev/dio0";
@@ -265,6 +265,8 @@ void carStatus_App::read_status()
 
         // Read the file line by line
         QTextStream in(&file);
+        line = in.readLine();
+
         // check if you reached the end of the file
         while (!in.atEnd())
         {
