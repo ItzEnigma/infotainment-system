@@ -14,8 +14,8 @@ carStatus_App::carStatus_App(QWidget *parent)
     QTimer *timer = new QTimer(this);
     // invokes read_temp function when the timer timees out
     connect(timer, &QTimer::timeout, this, &carStatus_App::read_status);
-    // timer times out every 100ms
-    timer->start(1000);
+    // timer times out every 250ms
+    timer->start(250);
 }
 
 carStatus_App::~carStatus_App()
@@ -123,8 +123,8 @@ void carStatus_App::add_Bled_on()
     blue_led->setPixmap(temp.scaled(w, h, Qt::KeepAspectRatio));
 
     ui->LED2_Status->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-               font-size: 28pt;font-stretch:ultra-condensed;'>" 
-                   "LED ON");
+               font-size: 28pt;font-stretch:ultra-condensed;'>"
+                             "LED ON");
 
     delete layout;
 }
@@ -157,7 +157,8 @@ void carStatus_App::add_Rled_on()
     int h = ui->red_led_frame->height();
     red_led->setPixmap(temp.scaled(w, h, Qt::KeepAspectRatio));
     ui->LED1_Status->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-               font-size: 28pt;font-stretch:ultra-condensed;'>" "LED ON");
+               font-size: 28pt;font-stretch:ultra-condensed;'>"
+                             "LED ON");
     // delete the layout...so it can be remade
     delete layout;
 }
@@ -193,7 +194,8 @@ void carStatus_App::add_Bled_off()
     // dispaly the label with the blue led to the blue led frame
     layout->addWidget(blue_led_off);
     ui->LED2_Status->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-               font-size: 28pt;font-stretch:ultra-condensed;'>" "LED OFF");
+               font-size: 28pt;font-stretch:ultra-condensed;'>"
+                             "LED OFF");
     delete layout;
 }
 
@@ -225,7 +227,8 @@ void carStatus_App::add_Rled_off()
     int h = ui->red_led_frame->height();
     red_led_off->setPixmap(temp.scaled(w, h, Qt::KeepAspectRatio));
     ui->LED1_Status->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
-               font-size: 28pt;font-stretch:ultra-condensed;'>" "LED OFF");
+               font-size: 28pt;font-stretch:ultra-condensed;'>"
+                             "LED OFF");
     // delete the layout...so it can be remade
     delete layout;
 }
@@ -249,9 +252,10 @@ void carStatus_App::read_status()
 
     /* set the path to the file */
     /* ----- MODIFY THE PATH TO THE TEMPERATURE FILE ----- */
-    QString temp_path = "/dev/dio2";
+    /* 28-3de1e380281d --> the serial number of the temperature sensor (YOURS WILL BE DIFFERENT) */
+    QString temp_path = "/sys/bus/w1/devices/28-3de1e380281d/temperature";
 
-    // set the path to the red and blue leds files
+    /* set the path to the led files */
     QString blueLed_path = "/dev/dio0";
     QString redLed_path = "/dev/dio1";
     /* -------------------------------------------------- */
@@ -264,30 +268,28 @@ void carStatus_App::read_status()
             throw 1;
         }
 
-        // open the file
-        QFile file(temp_path);
-
         // open the file to read
+        QFile file(temp_path);
         file.open(QIODevice::ReadOnly);
 
-        // Read the file line by line
+        // Read the contents of the file (temperature)
         QTextStream in(&file);
         line = in.readLine();
 
-        //  convert  the reading into float value
+        //  convert the reading into float value
         temp = line.toFloat() / 1000;
-        // reconvert the temperature into string for printing
+        // reconvert the temperature into string for printing on the screen
         temp_data = QString::number(temp);
 
         // display the output on the plainText
-        // QChar( 0x00B0) --> to display the temerature degree
+        // QChar( 0x00B0) --> to display the temerature degree symbol
         ui->label->setText("<span style='color: rgb(246, 245, 244); font-family:  Times New Roman, Times, serif; font-weight:bold; \
                        font-size: 36pt;font-stretch:ultra-condensed;'>" +
                            temp_data + ' ' + QChar(0x00B0) + "C");
         // closing the file
         file.close();
 
-        // check if the temperature is high or low
+        /* CHECK IF THE TEMPERATURE IS HIGH OR LOW */
         if (temp < 30)
         {
             remove_img();
@@ -304,15 +306,16 @@ void carStatus_App::read_status()
         temp = 0;
     }
 
-    /* CHECK IF THE TEMPERATURE IS HIGH OR LOW*/
-
+    /* ----------------- LED STATUS ----------------- */
     try
     {
+        // check if the file exists
         if (!QFile::exists(blueLed_path) || !QFile::exists(redLed_path))
         {
             throw 1;
         }
 
+        // open the file to read
         QFile blueLed_file(blueLed_path);
         QFile redLed_file(redLed_path);
 
@@ -327,11 +330,6 @@ void carStatus_App::read_status()
         {
             throw 1;
         }
-
-        // open the file to read
-        // blueLed_file.open(QIODevice::ReadOnly);
-        // redLed_file.open(QIODevice::ReadOnly);
-
         // Read the contents of the file
         QByteArray blueLed_data = blueLed_file.readAll();
         QByteArray redLed_data = redLed_file.readAll();
@@ -340,21 +338,18 @@ void carStatus_App::read_status()
         QString blueLed_state = QString::fromUtf8(blueLed_data).at(0);
         QString redLed_state = QString::fromUtf8(redLed_data).at(0);
 
-        // removes the "\n" from the end of the string
-        // blueLed_state.remove("\n");
-        // redLed_state.remove("\n");
-
         // closing the file files
         blueLed_file.close();
         redLed_file.close();
 
-        if (blueLed_state == "1" && redLed_state == "1")
+        // check the state of the leds
+        if (blueLed_state == "1" && redLed_state == "1") // both leds are on
         {
             remove_leds();
             add_Bled_on();
             add_Rled_on();
         }
-        else if (blueLed_state == "0" && redLed_state == "0")
+        else if (blueLed_state == "0" && redLed_state == "0") // both leds are off
         {
             remove_leds();
             add_Bled_off();
@@ -381,4 +376,3 @@ void carStatus_App::read_status()
         add_Rled_off();
     }
 }
-
