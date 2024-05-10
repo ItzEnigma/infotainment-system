@@ -5,6 +5,7 @@
 #include<QFileInfo>
 #include<QDateTime>
 #include<QPixmap>
+#include<QTextStream>
 
 
 
@@ -151,15 +152,38 @@ void Informative_APP::Kernel_info()
     // remove leading and trailing spaces
     kernelVersion = kernelVersion.trimmed();
 
-    // Get the path of the kernel image file
-    QString kernelPath = "/boot/vmlinuz-" + kernelVersion;
+//    // Get the path of the kernel image file
+//    QString kernelPath = "/boot/vmlinuz-" + kernelVersion;
 
-    // extract kernel information from the current kernel version
-    QFileInfo kernelInfo(kernelPath);
-    // extract the last time kernel have been updated
-    QDateTime modificationDate = kernelInfo.lastModified();
-    // convert date extracted to a string
-    QString dateModified = modificationDate.toString();
+//    // extract kernel information from the current kernel version
+//    QFileInfo kernelInfo(kernelPath);
+//    // extract the last time kernel have been updated
+//    QDateTime modificationDate = kernelInfo.lastModified();
+//    // convert date extracted to a string
+//    QString dateModified = modificationDate.toString();
+
+    // retrieve the kernel version
+    process->start("uname", QStringList() << "-v");
+    process->waitForFinished();
+
+    // Read the output of the command
+    QString data = process->readAllStandardOutput();
+
+    QTextStream stream(&data);
+
+    data = stream.readLine();
+    // [A-Z]: Matches any uppercase letter.
+    // [a-z]{2}: Matches exactly two lowercase letters.
+    // [A-Z][a-z]{2}: Matches an uppercase letter followed by exactly two lowercase letters. This represents the abbreviated month name like "Apr".
+    // +: Matches one or more occurrences of the previous character or group. In this case, it matches one or more spaces.
+    // \\d{1,2}: Matches one or two digits.
+    // \\d{2}:\\d{2}:\\d{2}: Matches two digits followed by a colon, repeated three times. This represents the time in the format "HH:MM:SS".
+    QRegExp l("[A-Z][a-z]{2} [A-Z][a-z]{2} +\\d{1,2} \\d{2}:\\d{2}:\\d{2}");
+    int index = data.indexOf(l);
+    QString kernelInfo =data.mid(index);
+    kernelInfo = kernelInfo.remove(" UTC 2");
+
+
 
     // <span> tag --> used to give each line a different style
     //<span> dispalyed word </span>
@@ -177,7 +201,7 @@ void Informative_APP::Kernel_info()
     kernel_update->setText("<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times, serif; font-weight:bold; \
             font-size: 24pt;'>Last Update</span><br>"\
         "<span style='color: rgb(246, 245, 244);font-family:  Times New Roman, Times,sans-serif; font-weight:bold; \
-                         font-size: 16pt;'>"+ dateModified +"</span>");
+                         font-size: 16pt;'>"+ kernelInfo +"</span>");
 
     // set frame shape to Horizontal line
     line4->setFrameShape(QFrame::HLine);
