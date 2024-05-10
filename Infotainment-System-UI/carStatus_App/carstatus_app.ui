@@ -36,6 +36,7 @@
        <font>
         <family>Times New Roman</family>
         <pointsize>40</pointsize>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -114,6 +115,7 @@ margin-bottom:20px;
           <property name="font">
            <font>
             <pointsize>24</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -244,6 +246,9 @@ margin-bottom:20px;
               <height>120</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border:transparent;</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -279,6 +284,7 @@ margin-bottom:20px;
             <property name="font">
              <font>
               <pointsize>18</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -315,6 +321,9 @@ margin-bottom:20px;
               <height>120</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border:transparent;</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -350,6 +359,7 @@ margin-bottom:20px;
             <property name="font">
              <font>
               <pointsize>18</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
