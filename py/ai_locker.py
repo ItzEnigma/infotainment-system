@@ -3,6 +3,9 @@ import time
 import threading
 import subprocess
 
+import os
+
+
 face_classifier = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
@@ -15,7 +18,7 @@ img = cv2.imread(imagePath)
 gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 def my_timer_callback():
-        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
+    subprocess.call("/usr/bin/gedit")# will be the lock screen
 
 def detect_bounding_box(vid):
     gray_image = cv2.cvtColor(vid, cv2.COLOR_BGR2GRAY)
@@ -38,7 +41,7 @@ while True:
     #cv2.imshow(
      #   "My Face Detection Project", video_frame
     #)  # display the processed frame in a window named "My Face Detection Project"
-    time.sleep(1)
+    #time.sleep(1)
     
     
     # Check if any faces are found

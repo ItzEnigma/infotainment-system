@@ -8,7 +8,7 @@ from paho.mqtt import client as mqtt_client
 
 broker = 'mqtt-dashboard.com'
 port = 1883
-topic = "topic/topics"
+topic = "/sudoteam/infotainment/gps"
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
 # username = 'emqx'
@@ -34,7 +34,7 @@ def publish(client):
     msg_count = 1
     while True:
         time.sleep(1)
-        msg = f"messages: {msg_count}"
+        msg = f"messa: {msg_count}"
         result = client.publish(topic, msg)
         # result: [0, 1]
         status = result[0]

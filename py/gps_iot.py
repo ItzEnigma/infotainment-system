@@ -13,7 +13,7 @@ import sys                  #import system package
 
 broker = 'mqtt-dashboard.com'
 port = 1883
-topic = "topic/topics"
+topic = "/sudoteam/infotainment/gps"
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
 # username = 'emqx'
@@ -45,10 +45,8 @@ def publish(client, msg):
 
 
 
-def GPS_Info():
-    global NMEA_buff
-    global lat_in_degrees
-    global long_in_degrees
+def GPS_Info(NMEA_buff):
+
     nmea_time = []
     nmea_latitude = []
     nmea_longitude = []
@@ -64,7 +62,7 @@ def GPS_Info():
     
     lat_in_degrees = convert_to_degrees(lat)    #get latitude in degree decimal format
     long_in_degrees = convert_to_degrees(longi) #get longitude in degree decimal format
-    
+    return (lat_in_degrees, long_in_degrees)
 #convert raw NMEA string into degree decimal format   
 def convert_to_degrees(raw_value):
     decimal_value = raw_value/100.00
@@ -77,50 +75,31 @@ def convert_to_degrees(raw_value):
 
 def listen_to_serial(client):
     gpgga_info = "$GPGGA,"
-    try:
-         ser = serial.Serial ("/dev/ttyS0")              #Open port with baud rate
-    except:
-        serial.Serial ("/dev/ttyS0").close()              #Open port with baud rate
-        ser = serial.Serial ("/dev/ttyS0")              #Open port with baud rate
    
+    ser = serial.Serial ("/dev/ttyUSB0")  
     GPGGA_buffer = 0
     NMEA_buff = 0
-    lat_in_degrees = 0
-    long_in_degrees = 0
-
+    
     try:
-        while True:
-            try:
-                received_data = (str)(ser.readline())   
-                #read NMEA string received
-                GPGGA_data_available = received_data.find(gpgga_info)   #check for NMEA GPGGA string                 
-                if (GPGGA_data_available>0):
-                    GPGGA_buffer = received_data.split("$GPGGA,",1)[1]  #store data coming after "$GPGGA," string 
-                    NMEA_buff = (GPGGA_buffer.split(','))               #store comma separated data in buffer
-                    try :
-                    
-                        nmea_time = []
-                        nmea_latitude = []
-                        nmea_longitude = []
-                        nmea_time = NMEA_buff[0]                    #extract time from GPGGA string
-                        nmea_latitude = NMEA_buff[1]                #extract latitude from GPGGA string
-                        nmea_longitude = NMEA_buff[3]               #extract longitude from GPGGA string
-        
-                        lat = float(nmea_latitude)                  #convert string into float for calculation
-                        longi = float(nmea_longitude)               #convertr string into float for calculation
-        
-                        lat_in_degrees = convert_to_degrees(lat)    #get latitude in degree decimal format
-                        long_in_degrees = convert_to_degrees(longi) #get longitude in degree decimal format
-                        publish(client,  f"{lat_in_degrees}, {long_in_degrees} ")
-                        GPS_Info()                                          #get time, latitude, longitude
-                        #publish(client,  "lat in degrees:" +  lat_in_degrees +" long in degree: "+ long_in_degrees)
-                        #print("lat in degrees:", lat_in_degrees," long in degree: ", long_in_degrees, '\n')
-                    except:
-                        pass
-            except :
+       while True:
+        received_data = (str)(ser.readline().decode())   
+        #read NMEA string received
+        GPGGA_data_available = received_data.find(gpgga_info)   #check for NMEA GPGGA string                 
+        if (GPGGA_data_available>=0):
+            GPGGA_buffer = received_data.split("$GPGGA,",1)[1]  #store data coming after "$GPGGA," string 
+            NMEA_buff = (GPGGA_buffer.split(','))               #store comma separated data in buffer
+            try :
+                lat, lng = GPS_Info(NMEA_buff)                                          #get time, latitude, longitude
+ 
+                print("lat in degrees:", lat," long in degree: ", lng, '\n')
+                body = f'"lat" : {lat}, "lon" : {lng}, "name" : "rpi", "command":' +  '{ "panit" : true, "zoom" : 18 } '
+                publish(client, body )
+                
+                print("<<<<<<<<press ctrl+c to plot location on google maps>>>>>>\n")               #press ctrl+c to plot on map and exit 
+                print("------------------------------------------------------------\n")
+            except:
+                print("can't decode")
                 pass
-                #ser.close()
-                #ser = serial.Serial ("/dev/ttyS0")  
     except KeyboardInterrupt:
         ser.close()     
         #webbrowser.open(map_link)        #open current position information in google map

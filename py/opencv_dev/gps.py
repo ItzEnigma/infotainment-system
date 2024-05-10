@@ -34,7 +34,7 @@ def convert_to_degrees(raw_value):
 
 
 gpgga_info = "$GPGGA,"
-ser = serial.Serial ("/dev/ttyS0")              #Open port with baud rate
+ser = serial.Serial ("/dev/ttyUSB0")  #/dev/ttyS0            #Open port with baud rate
 GPGGA_buffer = 0
 NMEA_buff = 0
 lat_in_degrees = 0
@@ -43,7 +43,6 @@ long_in_degrees = 0
 try:
     while True:
         received_data = (str)(ser.readline())   
-        print(received_data)
         #read NMEA string received
         GPGGA_data_available = received_data.find(gpgga_info)   #check for NMEA GPGGA string                 
         if (GPGGA_data_available>0):
