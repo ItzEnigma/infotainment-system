@@ -10,13 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    informative_app.cpp
+    carstatus_app.cpp
 
 HEADERS += \
-    informative_app.h
+    carstatus_app.h
 
 FORMS += \
-    informative_app.ui
+    carstatus_app.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,3 +25,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES +=

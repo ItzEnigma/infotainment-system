@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/img"/>
+    <qresource prefix="/">
+        <file>img/blue_led.png</file>
+        <file>img/blue_led_off.png</file>
+        <file>img/blue_temp.png</file>
+        <file>img/red_led.png</file>
+        <file>img/red_led_off.png</file>
+        <file>img/red_temp.png</file>
+    </qresource>
+</RCC>

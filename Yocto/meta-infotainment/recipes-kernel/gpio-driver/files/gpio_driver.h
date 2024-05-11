@@ -32,7 +32,7 @@
 
 #define BUFFER_SIZE         2
 #define NO_OF_DRIVERS       1
-#define NO_OF_DIOS_USED     5
+#define NO_OF_DIOS_USED     4
 #define GPIO_START_PIN      0
 
 #define MAXIMUM_PINS        10

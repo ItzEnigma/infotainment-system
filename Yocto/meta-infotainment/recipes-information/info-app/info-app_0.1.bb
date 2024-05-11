@@ -10,9 +10,9 @@ SRC_URI:append = " \
     file://informative_app.h \
     file://Informative_APP.pro \
     file://main.cpp \
-    file://informative_app.ui \   
+    file://informative_app.ui \ 
+    file://img/ \  
     "
-
  
 S = "${WORKDIR}"
 

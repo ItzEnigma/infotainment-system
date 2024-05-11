@@ -123,19 +123,6 @@ QPushButton#dateTime{
       </item>
      </layout>
     </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QFrame" name="settingsunderline">
-      <property name="styleSheet">
-       <string notr="true">background-color:#302A43;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::HLine</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="1">
      <widget class="QFrame" name="FrameButtonBreak">
       <property name="styleSheet">
@@ -180,7 +167,27 @@ QPushButton#dateTime{
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" colspan="3">
+    <item row="2" column="3">
+     <widget class="QFrame" name="settings">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:transparent;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4"/>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="4">
      <widget class="QLabel" name="label">
       <property name="minimumSize">
        <size>
@@ -207,6 +214,19 @@ font-weight: bold;
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QFrame" name="settingsunderline">
+      <property name="styleSheet">
+       <string notr="true">background-color:#302A43;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::HLine</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
       </property>
      </widget>
     </item>

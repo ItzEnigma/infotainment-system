@@ -1,0 +1,9 @@
+[Unit]
+Description=Keyboard binding with IR remote
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/bin/keyboard-ir-binding.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
