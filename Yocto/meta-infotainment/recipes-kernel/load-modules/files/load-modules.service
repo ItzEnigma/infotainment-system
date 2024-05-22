@@ -1,0 +1,9 @@
+[Unit]
+Description=Load kernel drivers
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/load-modules.sh
+
+[Install]
+WantedBy=multi-user.target
