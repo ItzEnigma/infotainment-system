@@ -63,9 +63,9 @@ It is integrated with a **home screen `launcher` application** to list all of th
 
 Each Section contains important parts of the project:
 
-- [Infotainment System UI](./infotainment_system_ui/) - Contains the Qt applications _(Informative App, Car Status App)_.
+- [Infotainment System UI](./Infotainment-System-UI/) - Contains the Qt applications _(Informative App, Car Status App)_.
 - [Python Scripts](./py/) - Contains the Python scripts to read the temperature sensor, GPS and to be running in the background publishing the state of the system to the IoT platform.
-- [Images](./image/) - Contains the image of the system that is built using Yocto and comprehensive illustration of the system integration.
+- [Images](./Images/) - Contains the image of the system that is built using Yocto and comprehensive illustration of the system integration.
 
 ---
 
