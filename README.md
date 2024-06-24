@@ -6,7 +6,7 @@ This is a project to create an infotainment system, infotainment system is a mas
 
 :bulb: **This infotainment system project _(Sudo Team)_ is designed to be generic across all of Embedded Linux Devices, for example infotainment, TVs, IoT devices, or POS.**
 
-![alt text](NTI_GP.jpg)
+![GP image](media/NTI_GP.jpg)
 
 ## Table of Contents
 
