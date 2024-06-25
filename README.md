@@ -68,11 +68,80 @@ Each Section contains important parts of the project:
 - [Images](./Images/) - Contains the image of the system that is built using Yocto and comprehensive illustration of the system integration.
 
 ---
+### Hardware Used
+1. Raspberry Pi 4
+2. Temperature Sensor DS18B20
+3. GPS Module NEO-6M
+4. IR Remote with IR receiver
+5. SD Card
+6. HDMI Display
+7. Two LEDs and a Button
 
 ### Steps
 
-1. ...
+1. Clone the required meta-layers:
 
+```bash
+git clone -b Kirkstone git://git.yoctoproject.org/poky.git
+git clone -b Kirkstone git://git.openembedded.org/meta-openembedded
+git clone -b Kirkstone git://git.yoctoproject.org/meta-raspberrypi
+git clone -b 6.5 git://git.yoctoproject.org/meta-qt6
+# Clone and use our meta-infotainment layer
+```
+
+2. Initialise your build environment:
+
+```bash
+source poky/oe-init-build-env ../build-infotaiment
+
+```
+
+3. Add the required layers to your `bblayers.conf`:
+
+```bash
+BBLAYERS ?= " \
+  PATH_TO/poky/meta \
+  PATH_TO/poky/meta-poky \
+  PATH_TO/poky/meta-yocto-bsp \
+  PATH_TO/meta-openembedded/meta-oe \
+  PATH_TO/meta-openembedded/meta-python \
+  PATH_TO/meta-openembedded/meta-networking \
+  PATH_TO/meta-openembedded/meta-multimedia
+  PATH_TO/meta-raspberrypi \
+  PATH_TO/meta-infotainment \
+  "
+```
+
+4. Add the required packages to your `local.conf`:
+
+> Check the `local.conf` file in our repo [local.conf](Yocto/conf/local.conf) for the required packages.
+
+> Please Note that you can use the custom image recipe [infotainment-image.bb](Yocto/meta-infotainment/recipes-core/images/infotainment-image.bb) and build with it instead of adding the packages to the `local.conf`. 
+
+5. Build the image:
+
+```bash
+# If you want to build the default image with custom local.conf file
+bitbake core-image-weston
+
+# OR if you want to build with the custom image recipe
+bitbake infotainment-image
+```
+6. Flash the image to the target device.
+```bash
+# 1- Go to the build/deploy/images/raspberrypi4-64 directory
+# 2- decompress the image file using the following command
+bzip2 -dk <the compressed wic image>
+
+# 3- Flash the image to the SD card
+sudo dd if=<the decompressed wic image> of=/dev/sdX 
+```
+7. Add the following to the boot/config.txt file in the SD card to enable the temperature sensor:
+```bash
+dtoverlay=w1-gpio
+```
+
+8. Boot the device 
 ---
 
 ## Contributors
