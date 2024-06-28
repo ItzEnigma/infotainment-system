@@ -1,13 +1,11 @@
 # python 3.11
 
 import random
-import time
-
 from paho.mqtt import client as mqtt_client
 
-import serial               #import serial pacakge
+import serial              
 from time import sleep
-import sys                  #import system package
+import sys                
 
 
 
@@ -16,8 +14,7 @@ port = 1883
 topic = "/sudoteam/infotainment/gps"
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
-# username = 'emqx'
-# password = 'public'
+
 
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):

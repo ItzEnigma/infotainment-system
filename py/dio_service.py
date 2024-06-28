@@ -2,13 +2,13 @@
 
 import random
 import subprocess 
-
 from paho.mqtt import client as mqtt_client
 
 
 broker = 'mqtt-dashboard.com'
 port = 1883
 topic = "/sudoteam/infotainment/dio"
+
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
 
@@ -21,7 +21,6 @@ def connect_mqtt() -> mqtt_client:
             print("Failed to connect, return code %d\n", rc)
 
     client = mqtt_client.Client(client_id)
-    # client.username_pw_set(username, password)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
