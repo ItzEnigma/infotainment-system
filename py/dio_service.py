@@ -29,7 +29,6 @@ def connect_mqtt() -> mqtt_client:
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         data = msg.payload.decode()
-        print(data)
         result = subprocess.check_output(f"echo {data} > /dev/dio1", shell = True, executable = "/bin/bash", stderr = subprocess.STDOUT)
         
     client.subscribe(topic)

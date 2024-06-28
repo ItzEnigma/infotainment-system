@@ -30,8 +30,7 @@ def temprature_broadcast(client):
                 tmp = int(tmp)
                 tmp = tmp / 1000
                 publish(client, tmp)
-                file1.close()  # to change file access modes
-            #received_data = (str)(ser.readline())   
+                file1.close()
         
     except KeyboardInterrupt:
         sys.exit(0)

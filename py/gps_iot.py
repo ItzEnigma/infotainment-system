@@ -24,7 +24,6 @@ def connect_mqtt():
             print("Failed to connect, return code %d\n", rc)
 
     client = mqtt_client.Client(client_id)
-    # client.username_pw_set(username, password)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
@@ -33,7 +32,6 @@ def connect_mqtt():
 def publish(client, msg):
         
         result = client.publish(topic, msg)
-        # result: [0, 1]
         status = result[0]
         if status == 0:
             print(f"Send `{msg}` to topic `{topic}`")
@@ -51,15 +49,13 @@ def GPS_Info(NMEA_buff):
     nmea_latitude = NMEA_buff[1]                #extract latitude from GPGGA string
     nmea_longitude = NMEA_buff[3]               #extract longitude from GPGGA string
     
-    #print("NMEA Time: ", nmea_time,'\n')
-    #print ("NMEA Latitude:", nmea_latitude,"NMEA Longitude:", nmea_longitude,'\n')
-    
     lat = float(nmea_latitude)                  #convert string into float for calculation
     longi = float(nmea_longitude)               #convertr string into float for calculation
     
     lat_in_degrees = convert_to_degrees(lat)    #get latitude in degree decimal format
     long_in_degrees = convert_to_degrees(longi) #get longitude in degree decimal format
     return (lat_in_degrees, long_in_degrees)
+
 #convert raw NMEA string into degree decimal format   
 def convert_to_degrees(raw_value):
     decimal_value = raw_value/100.00
@@ -88,18 +84,15 @@ def listen_to_serial(client):
             try :
                 lat, lng = GPS_Info(NMEA_buff)                                          #get time, latitude, longitude
  
-                print("lat in degrees:", lat," long in degree: ", lng, '\n')
+                #print("lat in degrees:", lat," long in degree: ", lng, '\n') in case of debugging
                 body = f'"lat" : {lat}, "lon" : {lng}, "name" : "rpi", "command":' +  '{ "panit" : true, "zoom" : 18 } '
                 publish(client, body )
-                
-                print("<<<<<<<<press ctrl+c to plot location on google maps>>>>>>\n")               #press ctrl+c to plot on map and exit 
-                print("------------------------------------------------------------\n")
+                              
             except:
                 print("can't decode")
                 pass
     except KeyboardInterrupt:
         ser.close()     
-        #webbrowser.open(map_link)        #open current position information in google map
         sys.exit(0)
 
 
