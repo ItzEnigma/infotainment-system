@@ -65,7 +65,7 @@ Each Section contains important parts of the project:
 
 - [Infotainment System UI](./Infotainment-System-UI/) - Contains the Qt applications _(Informative App, Car Status App)_.
 - [Python Scripts](./py/) - Contains the Python scripts to read the temperature sensor, GPS and to be running in the background publishing the state of the system to the IoT platform.
-- [Images](./Images/) - Contains the image of the system that is built using Yocto and comprehensive illustration of the system integration.
+- [Yocto Infotainment Project](./Yocto/) - Contains the image of the system that is built using Yocto and comprehensive illustration of the system integration.
 
 ---
 ### Hardware Used
@@ -142,6 +142,7 @@ dtoverlay=w1-gpio
 ```
 
 8. Boot the device 
+
 ---
 
 ## Contributors
@@ -154,9 +155,12 @@ dtoverlay=w1-gpio
 
 ---
 
-## Demo
+## Demo and Presentation
 
-[Demo Video]
+[Demo Video](https://drive.google.com/file/d/110d7-f9zQFxSCmjZNM7Rl6XtoVfufo6w/view?usp=sharing)
+
+More details is available in the [Presentation](https://drive.google.com/file/d/110d7-f9zQFxSCmjZNM7Rl6XtoVfufo6w/view?usp=sharing)
+
 
 ---
 
